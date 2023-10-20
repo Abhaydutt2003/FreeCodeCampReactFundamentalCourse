@@ -3,50 +3,72 @@ import ReactDOM from "react-dom/client";
 
 import "./index.css";
 
-const firstBook = {
-  author: "morgan housel",
-  title: "The Psychology Of Money",
-  img: "./images/money.jpg",
-};
-
-const secondBook = {
-  author: "hector garcia",
-  title: "Ikigai",
-  img: "./images/ikigai.jpg",
-};
+const books = [
+  {
+    author: "morgan housel",
+    title: "The Psychology Of Money",
+    img: "./images/money.jpg",
+    id: 1,
+  },
+  {
+    author: "hector garcia",
+    title: "Ikigai",
+    img: "./images/ikigai.jpg",
+    id: 2,
+  },
+];
 
 const BookList = () => {
   return (
     <section className="bookList">
-      <Book
-        img={firstBook.img}
-        author={firstBook.author}
-        title={firstBook.title}
-      >
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo
-          doloribus, est qui libero eum sunt cumque aut reiciendis cum
-          veritatis, dolorum perspiciatis, dicta repudiandae facere dolore et
-          vero. Ipsa, reiciendis?
-        </p>
-        <button>Click Me</button>
-      </Book>
-      <Book
-        img={secondBook.img}
-        author={secondBook.author}
-        title={secondBook.title}
-      />
+      <EventExamples />
+      {books.map((input) => {
+        return <Book {...input} key={input.id} />;
+      })}
     </section>
   );
 };
 
-const Book = ({ author, img, title,children }) => {
+const EventExamples = () => {
+  const handleFormInput = (e) => {
+    console.log(`Input name : ${e.target.name}`);
+    console.log(`Input value : ${e.target.value}`);
+    console.log("Handle  form input");
+  };
+  const handleButtonInput = () => {
+    alert("handle button input");
+  };
+  const handleFormSubmission = (e) => {
+    e.preventDefault();
+    console.log("form submitted");
+  };
+
+  return (
+    <section>
+      <form onSubmit={handleFormSubmission}>
+        <h2>Typical Form</h2>
+        <input
+          type="text"
+          name="example"
+          onChange={handleFormInput}
+          style={{ margin: "1rem 0" }}
+        />
+        <button type="submit">submit</button>
+      </form>
+      <div>
+        <button onClick={handleButtonInput}>Click Me!</button>
+      </div>
+    </section>
+  );
+};
+
+const Book = (props) => {
+  const { img, title, author } = props;
   return (
     <article className="book">
       <img src={img} alt="BLAH BLAH 1" />
       <h2>{title}</h2>
       <h4>{author.toUpperCase()}</h4>
-      {children}
     </article>
   );
 };
