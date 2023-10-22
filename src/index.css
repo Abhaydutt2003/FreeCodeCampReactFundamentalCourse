@@ -29,7 +29,7 @@ body {
 .book {
   background:lightblue;
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 2rem;  
   text-align: center;
   position: relative;
 }
